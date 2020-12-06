@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AutomobileServiceCenter.Models\AutomobileServiceCenter.Models.csproj" />
+    <ProjectReference Include="..\AutomobileServiceCenter.Utilities\AutomobileServiceCenter.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

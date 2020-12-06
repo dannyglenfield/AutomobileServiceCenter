@@ -5,7 +5,13 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomobileServiceCenter.Web", "AutomobileServiceCenter.Web\AutomobileServiceCenter.Web.csproj", "{BD1E1DFA-BF66-4126-8128-8F708DEFF007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureStorageTest", "AzureStorageTest\AzureStorageTest.csproj", "{9C38D399-1B5C-453A-876E-4301DEDB5558}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureStorageTest", "AzureStorageTest\AzureStorageTest.csproj", "{9C38D399-1B5C-453A-876E-4301DEDB5558}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomobileServiceCenter.Models", "AutomobileServiceCenter.Models\AutomobileServiceCenter.Models.csproj", "{B2A8E6F4-38C2-4868-B301-94FBA7817216}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomobileServiceCenter.Utilities", "AutomobileServiceCenter.Utilities\AutomobileServiceCenter.Utilities.csproj", "{C21E7F70-56F7-4FD3-B03F-786E6E948D22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomobileServiceCenter.DataAccess", "AutomobileServiceCenter.DataAccess\AutomobileServiceCenter.DataAccess.csproj", "{AE17E500-7E86-4106-BF38-F525B1F96594}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{9C38D399-1B5C-453A-876E-4301DEDB5558}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C38D399-1B5C-453A-876E-4301DEDB5558}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C38D399-1B5C-453A-876E-4301DEDB5558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A8E6F4-38C2-4868-B301-94FBA7817216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A8E6F4-38C2-4868-B301-94FBA7817216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A8E6F4-38C2-4868-B301-94FBA7817216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A8E6F4-38C2-4868-B301-94FBA7817216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C21E7F70-56F7-4FD3-B03F-786E6E948D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C21E7F70-56F7-4FD3-B03F-786E6E948D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C21E7F70-56F7-4FD3-B03F-786E6E948D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C21E7F70-56F7-4FD3-B03F-786E6E948D22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE17E500-7E86-4106-BF38-F525B1F96594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE17E500-7E86-4106-BF38-F525B1F96594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE17E500-7E86-4106-BF38-F525B1F96594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE17E500-7E86-4106-BF38-F525B1F96594}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
