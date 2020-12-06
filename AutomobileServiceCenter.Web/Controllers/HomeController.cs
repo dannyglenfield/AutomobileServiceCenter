@@ -1,21 +1,20 @@
-﻿using AutomobileServiceCenter.Web.Models;
+﻿using AutomobileServiceCenter.Utilities;
+using AutomobileServiceCenter.Web.Configuration;
+using AutomobileServiceCenter.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
+using Microsoft.Extensions.Options;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace AutomobileServiceCenter.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IOptions<ApplicationSettings> _settings;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IOptions<ApplicationSettings> settings)
         {
-            _logger = logger;
+            _settings = settings;
         }
 
         public IActionResult Dashboard()
@@ -25,6 +24,14 @@ namespace AutomobileServiceCenter.Web.Controllers
 
         public IActionResult Index()
         {
+            // Set Session
+            HttpContext.Session.SetSession("Test", _settings.Value);
+
+            // Get Session
+            var settings = HttpContext.Session.GetSession<ApplicationSettings>("Test");
+
+            ViewBag.Title = _settings.Value.ApplicationTitle;
+
             return View();
         }
 
