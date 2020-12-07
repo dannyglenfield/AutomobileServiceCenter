@@ -1,18 +1,17 @@
+using System;
 using AutomobileServiceCenter.Web.Configuration;
 using AutomobileServiceCenter.Web.Data;
+using AutomobileServiceCenter.Web.Models;
+using ElCamino.AspNetCore.Identity.AzureTable.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using IdentityRole = ElCamino.AspNetCore.Identity.AzureTable.Model.IdentityRole;
 
 namespace AutomobileServiceCenter.Web
 {
@@ -28,24 +27,36 @@ namespace AutomobileServiceCenter.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
-            
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            // Add ElCamino Azure Table Identity services.
+            services.AddIdentity<ApplicationUser, IdentityRole>((options) =>
+            {
+                options.User.RequireUniqueEmail = true;
+            })
+                .AddAzureTableStores<ApplicationDbContext>(new Func<IdentityConfiguration>(() =>
+                {
+                    IdentityConfiguration idconfig = new IdentityConfiguration();
+                    idconfig.TablePrefix = Configuration.GetSection("IdentityAzureTable:IdentityConfiguration:TablePrefix").Value;
+                    idconfig.StorageConnectionString = Configuration.GetSection("IdentityAzureTable:IdentityConfiguration:StorageConnectionString").Value;
+                    idconfig.LocationMode = Configuration.GetSection("IdentityAzureTable:IdentityConfiguration:LocationMode").Value;
+                    return idconfig;
+                }))
+                .AddDefaultTokenProviders()
+                .CreateAzureTablesIfNotExists<ApplicationDbContext>();
+
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddOptions();
             services.Configure<ApplicationSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            services.AddSingleton<IIdentitySeed, IdentitySeed>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, IIdentitySeed storageSeed)
         {
             if (env.IsDevelopment())
             {
@@ -76,6 +87,16 @@ namespace AutomobileServiceCenter.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                // Resolve ASP.NET Core Identity with DI help
+                var userManager = (UserManager<ApplicationUser>)scope.ServiceProvider.GetService(typeof(UserManager<ApplicationUser>));
+                var roleManager = (RoleManager<IdentityRole>)scope.ServiceProvider.GetService(typeof(RoleManager<IdentityRole>));
+                var options = app.ApplicationServices.GetService<IOptions<ApplicationSettings>>();
+                
+                await storageSeed.Seed(userManager, roleManager, options);
+            }
         }
     }
 }
