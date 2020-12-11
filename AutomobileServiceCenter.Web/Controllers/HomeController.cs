@@ -1,10 +1,9 @@
-﻿using AutomobileServiceCenter.Utilities;
+﻿using System.Diagnostics;
+using AutomobileServiceCenter.Utilities;
 using AutomobileServiceCenter.Web.Configuration;
 using AutomobileServiceCenter.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System.Diagnostics;
-
 
 namespace AutomobileServiceCenter.Web.Controllers
 {
@@ -15,11 +14,6 @@ namespace AutomobileServiceCenter.Web.Controllers
         public HomeController(IOptions<ApplicationSettings> settings)
         {
             _settings = settings;
-        }
-
-        public IActionResult Dashboard()
-        {
-            return View();
         }
 
         public IActionResult Index()

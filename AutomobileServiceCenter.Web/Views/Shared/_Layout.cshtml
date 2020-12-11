@@ -5,21 +5,21 @@
 <header>
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">
+            <a id="logo-container" href="/" class="brand-logo">
                 <img class="responsive-img" src="~/images/logo.png" alt="Logo" />
             </a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Login</a></li>
+                <li><a href="/Account/Login">Login</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
             <ul id="nav-mobile" class="sidenav">
-                <li><a href="#">Login</a></li>
+                <li><a href="/Account/Login">Login</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger">
                 <i class="material-icons">menu</i>
             </a>
-        </div>    
+        </div>
     </nav>
 
     <div id="index-banner" class="parallax-container">
@@ -83,3 +83,7 @@
         </div>
     </div>
 </footer>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

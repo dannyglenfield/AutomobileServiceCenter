@@ -14,6 +14,25 @@
     }
 }
 
+/* Login Page Styles */
+.padding-left-10px {
+    padding-left: 10px;
+}
+
+.input-field .input-validation-error {
+    border-bottom: 1px solid #FF4081;
+    box-shadow: 0 1px 0 0 #FF4081;
+}
+
+.input-field .valid {
+    border-bottom: 1px solid #00E676;
+    box-shadow: 0 1px 0 0 #00E676;
+}
+
+.validation-summary-errors {
+    color: #FF4081;
+}
+
 /* SecureLayout Styles */
 /* Adjusting padding to display Side Nav */
 header.secureLayout, main.secureLayout, footer.secureLayout {

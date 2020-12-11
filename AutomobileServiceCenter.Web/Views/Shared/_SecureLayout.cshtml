@@ -10,7 +10,7 @@
                 <h5><a class="page-title">Automobile Service Center</a></h5>
             </div>
         </div>
-    </nav> 
+    </nav>
 
     <ul id="nav-mobile" class="sidenav sidenav-fixed">
         <li>
@@ -47,7 +47,7 @@
 
         <li><a class="collapsible-header" href="#!"><i class="material-icons">settings</i>Settings</a></li>
 
-        <li><a class="collapsible-header" href="#!"><i class="material-icons">exit_to_app</i>Logout</a></li>
+        <li><a class="collapsible-header" href="#!" id="logoutLink"><i class="material-icons">exit_to_app</i>Logout</a></li>
     </ul>
 </header>
 
@@ -95,3 +95,19 @@
         </div>
     </div>
 </footer>
+
+<form class="hide" method="post" id="logout_form" asp-controller="Account" asp-action="Logout">
+    <input type="submit" value="Logout" />
+</form>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+
+<script type="text/javascript">
+    $(function () {
+        $('#logoutLink').click(function () {
+            $('#logout_form').submit();
+        });
+    });
+</script>
+}
